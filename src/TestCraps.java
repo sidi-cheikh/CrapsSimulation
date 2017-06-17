@@ -33,13 +33,13 @@ public class TestCraps
 	 * Field <code>numWins</code> tracks the total number of wins out of
 	 * <code>numPlays</code> total plays.
 	 */
-	private int numWins;
+	private int numberOfWinsOutOfPlays;
 
 	/**
 	 * Field <code>numPlays</code> counts the total number of individual games
 	 * to play.
 	 */
-	private int numPlays;
+	private int numberOfGamesToPlay;
 
 	/**
 	 * int array field <code>winSteps</code> tracks number of wins w after
@@ -80,13 +80,13 @@ public class TestCraps
 
 	public void play(int n)
 	{
-		numPlays = n;
-		numWins = 0;
-		for (int i = 0; i < numPlays; i++)
+		numberOfGamesToPlay = n;
+		numberOfWinsOutOfPlays = 0;
+		for (int i = 0; i < numberOfGamesToPlay; i++)
 		{
 			if (game.playOneGame(winSteps, lossSteps))
 			{
-				numWins++;
+				numberOfWinsOutOfPlays++;
 			}
 		}
 	}
@@ -109,9 +109,9 @@ public class TestCraps
 					+ lossSteps[i] + ")");
 		}
 
-		StdOut.println("\nPlayed " + numPlays + " games total.");
+		StdOut.println("\nPlayed " + numberOfGamesToPlay + " games total.");
 
-		StdOut.println("Won " + numWins + "/" + numPlays + "==" + 100.0 * (0.0 + numWins) / numPlays + "%");
+		StdOut.println("Won " + numberOfWinsOutOfPlays + "/" + numberOfGamesToPlay + "==" + 100.0 * (0.0 + numberOfWinsOutOfPlays) / numberOfGamesToPlay + "%");
 
 	}
 
