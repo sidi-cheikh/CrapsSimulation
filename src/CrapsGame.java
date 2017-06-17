@@ -29,11 +29,7 @@ public class CrapsGame
 		// Get the value of the roll as point
 		// Print out this value as 'first roll'
 
-		dice.roll();
-
-		point = dice.getLastRoll();
-
-		println("First roll is: " + dice.getLastRoll());
+		point = doARoll();
 
 		// If point is 7 or 11, announce an immediate win for player,
 		// increment wins[steps], and return true indicating win
@@ -42,6 +38,8 @@ public class CrapsGame
 		{
 			return winForPlayer(wins, steps);
 		}
+		// Else if point is 2, 3, or 12, announce an immediate loss for player,
+		// increment losses[steps], and return false indicating loss
 		else if (point==2 || point == 3 || point==12)
 		{
 			println("Loss for player with " + point);
@@ -49,9 +47,6 @@ public class CrapsGame
 			// losses[steps]++; 
 			return false;
 		}
-
-		// Else if point is 2, 3, or 12, announce an immediate loss for player,
-		// increment losses[steps], and return false indicating loss
 
 		// If not an immediate win nor loss, print out point
 		// roll the dice over and over, keeping track of steps,
@@ -67,30 +62,8 @@ public class CrapsGame
 		{
 			println("Point is: " + point);
 			
-			int value = 0;
-			do
-			{
-				dice.roll();
-				steps++;
-				value = dice.getLastRoll();
-				println("Next roll is: " + value);
-			}
-			while (value != 7 && value != point);
-	
-			// the following is equivalent to the above.
-			// Is it easier to understand?
-			
-//			while (true)
-//			{
-//				dice.roll();
-//				value = dice.getLastRoll();
-//				println("Next roll is: " + value);
-//				if (value==7)
-//					break;
-//				if (value==point)
-//					break;
-//			}
-			
+			int value = rollUntilWinOrLoss(point,steps);
+		
 			if (value==7)
 			{
 				// loss: record losses and return false
@@ -109,6 +82,26 @@ public class CrapsGame
 		}
 
 		return false;
+	}
+
+	private int rollUntilWinOrLoss(int point, int steps)
+	{
+		int value;
+		do
+		{
+			dice.roll();
+			steps++;
+			value = dice.getLastRoll();
+			println("Next roll is: " + value);
+		}
+		while (value != 7 && value != point);
+		return value;
+	}
+
+	private int doARoll()
+	{
+		dice.roll();
+		return dice.getLastRoll();
 	}
 
 	private boolean winForPlayer(int[] wins, int steps)
