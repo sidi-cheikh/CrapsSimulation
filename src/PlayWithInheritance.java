@@ -17,9 +17,9 @@ public class PlayWithInheritance
 
 		// which constructors are called in the following?
 
-		Die die1 = new Die();
-		CrookedDie1 crooked1 = new CrookedDie1();
-		CrookedDie2 crooked2 = new CrookedDie2();
+		Die normalDie1 = new Die();
+		CrookedDie1 crookedDie1 = new CrookedDie1();
+		CrookedDie2 crookedDie2 = new CrookedDie2();
 
 		StdOut.println();
 
@@ -35,25 +35,25 @@ public class PlayWithInheritance
 			// => toString() is automatically invoked, and its returned value
 			// used instead!
 
-			StdOut.println(die1.toString());
+			StdOut.println(normalDie1.toString());
 
 			StdOut.print("toString() automatically called when reference treated as String: ");
-			StdOut.println(die1.toString());
-			StdOut.println("Concatenating a string to a reference: " + die1.toString());
+			StdOut.println(normalDie1.toString());
+			StdOut.println("Concatenating a string to a reference: " + normalDie1.toString());
 		}
 		else if (RUN_EXAMPLE == 3)
 		{
 			// concatenate " " + super.toString() to end of toString() code
 			// inside each of 3 classes, then watch the result when run again.
 
-			StdOut.println("die1's toString(): '" + die1 + "'");
-			StdOut.println("crooked1's toString(): '" + crooked1 + "'");
-			StdOut.println("crooked2's toString(): '" + crooked2 + "'");
+			StdOut.println("die1's toString(): '" + normalDie1 + "'");
+			StdOut.println("crooked1's toString(): '" + crookedDie1 + "'");
+			StdOut.println("crooked2's toString(): '" + crookedDie2 + "'");
 		}
 		else if (RUN_EXAMPLE == 4)
 		{
 			// Die alias = die1; // try replacing this line with either below
-			Die alias = crooked1; // upcasting!
+			Die alias = crookedDie1; // upcasting!
 			// Die alias = crooked2; // ditto
 
 			StdOut.println("alias's toString(): '" + alias.toString() + "'");
@@ -66,11 +66,11 @@ public class PlayWithInheritance
 			double toss = Math.random(); // [0.0..1.0)
 
 			if (toss < 0.333)
-				alias = die1;
+				alias = normalDie1;
 			else if (toss < 0.666)
-				alias = crooked1;
+				alias = crookedDie1;
 			else
-				alias = crooked2;
+				alias = crookedDie2;
 
 			// Can the compiler figure out the actual type
 			// of alias in the following call?
@@ -82,13 +82,13 @@ public class PlayWithInheritance
 		{
 			Die another = new Die();
 
-			Dice dice = new Dice(die1, crooked1); // we'll try substituting here
+			Dice dice = new Dice(normalDie1, crookedDie1); // we'll try substituting here
 
 			dice.roll();
 
 			int result = dice.getLastRoll();
 
-			StdOut.printf("Roll of '%s' and '%s' is: %d.\n", die1, crooked1, result);
+			StdOut.printf("Roll of '%s' and '%s' is: %d.\n", normalDie1, crookedDie1, result);
 		}
 
 		StdOut.println();
